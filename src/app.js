@@ -4,7 +4,6 @@ import authRoutes from "./routes/auth.routes.js";
 import acertijosRoutes from "./routes/acertijos.routes.js"
 import usuariosRoutes from "./routes/usuarios.routes.js";
 import categoriasRoutes from "./routes/categorias.routes.js";
-import acertijosRoutes from "./routes/acertijos.routes.js";
 import resultadosRoutes from "./routes/resultados.routes.js";
 
 const app = express();
