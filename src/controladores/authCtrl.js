@@ -35,32 +35,41 @@ export const register = async (req, res) => {
 
 
 export const login = async (req, res) => {
-  const { nombre_usuario, password } = req.body;
+  try {
+    const { nombre_usuario, password } = req.body;
 
-  // buscar usuario
-  const [users] = await conmysql.query(
-    "SELECT * FROM usuarios WHERE nombre_usuario = ?",
-    [nombre_usuario]
-  );
+    // Buscar usuario en la BD
+    const [users] = await conmysql.query(
+      "SELECT * FROM usuarios WHERE nombre_usuario = ?",
+      [nombre_usuario]
+    );
 
-  if (users.length === 0) {
-    return res.status(404).json({ message: "Usuario no encontrado" });
-  }
+    console.log("Login request:", nombre_usuario);
+    console.log("Usuarios encontrados:", users); // Esto te mostrará qué usuario trae la BD
 
-  const usuario = users[0];
-
-  // validar contraseña
-  const ok = await bcrypt.compare(password, usuario.password_hash);
-  if (!ok) {
-    return res.status(400).json({ message: "Contraseña incorrecta" });
-  }
-
-  res.json({ 
-    success: true,
-    message: "Login correcto",
-    usuario: {
-      id: usuario.id,
-      nombre_usuario: usuario.nombre_usuario
+    if (users.length === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
-  });
+
+    const usuario = users[0];
+
+    // Validar contraseña
+    const ok = await bcrypt.compare(password, usuario.password_hash);
+    if (!ok) {
+      return res.status(401).json({ message: "Contraseña incorrecta" });
+    }
+
+    // Devolver usuario correcto
+    res.json({ 
+      success: true,
+      message: "Login correcto",
+      usuario: {
+        id: usuario.id,
+        nombre_usuario: usuario.nombre_usuario
+      }
+    });
+  } catch (error) {
+    console.error("Error login:", error);
+    res.status(500).json({ message: "Error al iniciar sesión", error });
+  }
 };
