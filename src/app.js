@@ -7,7 +7,7 @@ import categoriasRoutes from "./routes/categorias.routes.js";
 import resultadosRoutes from "./routes/resultados.routes.js";
 
 const app = express();
-
+app.use(express.json());
 
 const corsOptions = {
   origin: (origin, callback) => {
