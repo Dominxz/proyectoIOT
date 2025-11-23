@@ -13,7 +13,7 @@ const corsOptions = {
   origin: (origin, callback) => {
     if (!origin) return callback(null, true); 
     const allowedOrigins = [
-      "https://apiproyecto20252.onrender.com",
+      "https://proyectoiot-efn4.onrender.com",
       "http://localhost:8100",    // Ionic local
       "capacitor://localhost",    // App Android/iOS
       "http://localhost",         // WebView / navegador local
