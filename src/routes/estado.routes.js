@@ -1,7 +1,9 @@
 import { Router } from "express";
 import {
   setUsuarioActivo,
-  getUsuarioActivo
+  getUsuarioActivo,
+  setClaveFinal,
+  getClaveFinal
 } from "../controladores/estadoCtrl.js";
 
 const router = Router();
