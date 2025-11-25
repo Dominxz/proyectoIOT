@@ -36,3 +36,29 @@ export const postUsuario = async (req, res) => {
     res.status(500).json({ message: "Error al crear usuario", error });
   }
 };
+
+
+export const setCategoriasCumplidas = async (req, res) => {
+  try {
+    const { id, cumplidas } = req.body; 
+    // cumplidas = 0 o 1
+
+    if (typeof cumplidas === "undefined") {
+      return res.status(400).json({ message: "Falta el estado 'cumplidas'" });
+    }
+
+    const [result] = await conmysql.query(
+      "UPDATE usuarios SET categorias_cumplidas = ? WHERE id = ?",
+      [cumplidas, id]
+    );
+
+    res.json({
+      success: true,
+      message: "Estado de categorías actualizado",
+      actualizado: cumplidas
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Error actualizando categorías", error });
+  }
+};
