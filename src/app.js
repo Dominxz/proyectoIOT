@@ -6,6 +6,7 @@ import usuariosRoutes from "./routes/usuarios.routes.js";
 import categoriasRoutes from "./routes/categorias.routes.js";
 import resultadosRoutes from "./routes/resultados.routes.js";
 import estadoRoutes from "./routes/estado.routes.js";
+import finalRoutes from "./routes/final.routes.js";
 const app = express();
 app.use(express.json());
 
@@ -40,6 +41,7 @@ app.use("/api", categoriasRoutes);
 app.use("/api", acertijosRoutes);
 app.use("/api", resultadosRoutes);
 app.use("/api", estadoRoutes);
+app.use("/api", finalRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Endpoint not found" });
