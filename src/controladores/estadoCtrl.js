@@ -2,6 +2,7 @@
 
 // Variable temporal en memoria (no en BD)
 let usuarioActual = null;
+let claveFinalActual = null;
 
 // La app enviará el usuario aquí después del login
 export const setUsuarioActivo = async (req, res) => {
